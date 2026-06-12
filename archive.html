@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Архив выпусков — AgentIREST Daily</title>
+<style>
+:root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --text:#c9d1d9; --muted:#8b949e; --accent:#58a6ff; --green:#3fb950; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.6; }
+.container { max-width:800px; margin:0 auto; padding:2rem 1rem; }
+h1 { font-size:2rem; margin-bottom:1rem; }
+h1 span { color:var(--accent); }
+.back { color:var(--muted); text-decoration:none; font-size:0.9rem; }
+.back:hover { color:var(--accent); }
+.issue { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1rem 1.5rem; margin-bottom:0.75rem; }
+.issue:hover { border-color:var(--accent); }
+.issue h3 { font-size:1rem; margin-bottom:0.3rem; }
+.issue h3 a { color:var(--text); text-decoration:none; }
+.issue h3 a:hover { color:var(--accent); }
+.issue .date { color:var(--muted); font-size:0.8rem; }
+.issue .preview { color:var(--muted); font-size:0.85rem; margin-top:0.3rem; }
+footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0; margin-top:3rem; border-top:1px solid var(--border); }
+</style>
+</head>
+<body><div class="container">
+<a href="/" class="back">← AgentIREST</a>
+<h1>Архив <span>выпусков</span></h1>
+<div id="issues"><p style="color:var(--muted);">Загрузка...</p></div>
+<footer>agentirest.com &copy; 2026</footer>
+</div>
+<script>
+fetch('/digests/index.json')
+  .then(r => r.json())
+  .then(data => {
+    const el = document.getElementById('issues');
+    el.innerHTML = data.issues.reverse().map(n => `
+      <div class="issue">
+        <h3><a href="#" onclick="loadIssue(${n})">Выпуск #${n}</a></h3>
+        <div class="date" id="date-${n}">Загрузка...</div>
+        <div class="preview" id="preview-${n}">Загрузка...</div>
+      </div>
+    `).join('');
+    data.issues.forEach(n => {
+      fetch(`/digests/issue-${n}.json`)
+        .then(r => r.json())
+        .then(issue => {
+          document.getElementById(`date-${n}`).textContent = issue.date;
+          document.getElementById(`preview-${n}`).textContent = issue.skills.map(s=>s.name).join(' · ');
+        });
+    });
+  });
+</script>
+</body>
+</html>

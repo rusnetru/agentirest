@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>AgentIREST Daily</title>
+  <link>https://agentirest.com</link>
+  <description>Ежедневный дайджест навыков и MCP-серверов для AI-агентов</description>
+  <language>ru</language>
+  <lastBuildDate>Wed, 11 Jun 2026 09:00:00 +0300</lastBuildDate>
+  <item>
+    <title>Выпуск #1: Топ-7 навыков и MCP-серверов недели</title>
+    <link>https://agentirest.com/#issue-1</link>
+    <guid>https://agentirest.com/digests/issue-1.json</guid>
+    <pubDate>Wed, 11 Jun 2026 09:00:00 +0300</pubDate>
+    <description>Playwright MCP, 13-Agent Security Orchestrator, OWASP AST10, GitHub MCP, E2B Sandbox, awesome-agent-skills, Best-of-MCP-Servers</description>
+  </item>
+</channel>
+</rss>

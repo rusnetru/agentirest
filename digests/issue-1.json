@@ -1,0 +1,78 @@
+{
+  "issue": 1,
+  "date": "2026-06-11",
+  "title": "Выпуск #1: Топ-7 навыков и MCP-серверов недели",
+  "skills": [
+    {
+      "name": "Playwright MCP Server",
+      "source": "Microsoft / GitHub",
+      "category": "Browser Automation",
+      "desc": "Самый популярный MCP-сервер 2026 года. 30 000+ звёзд на GitHub. Позволяет агенту управлять браузером: скриншоты, клики, заполнение форм, E2E-тесты. Эталонный MCP-сервер — с него стоит начинать знакомство с протоколом.",
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "secure": true,
+      "is_new": false,
+      "is_mcp": true
+    },
+    {
+      "name": "13-Agent Security Orchestrator",
+      "source": "Reddit r/ClaudeAI / GitHub",
+      "category": "Security",
+      "desc": "Только что вышедший навык для Claude Code: оркестратор 12 специализированных AI-агентов безопасности. Пентест, SAST, DAST, анализ зависимостей — в одном SKILL.md. Идеальный пример того, как навыки эволюционируют от одиночных скриптов к multi-agent системам.",
+      "url": "https://www.reddit.com/r/ClaudeAI/comments/1rqnt3y/",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false
+    },
+    {
+      "name": "OWASP Agentic Skills Top 10 (AST10)",
+      "source": "OWASP Foundation",
+      "category": "Security / Standards",
+      "desc": "Первый в индустрии стандарт безопасности для AI-агентских навыков. 10 критических рисков: от prompt injection до утечки данных. Документ, который должен прочитать каждый, кто публикует или устанавливает SKILL.md-навыки.",
+      "url": "https://owasp.org/www-project-agentic-skills-top-10/",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false
+    },
+    {
+      "name": "GitHub MCP Server (Official)",
+      "source": "GitHub / Anthropic",
+      "category": "DevTools",
+      "desc": "Официальный MCP-сервер GitHub: issues, PR, code search, управление репозиториями прямо из агента. Стабильный, хорошо документированный, с активным сообществом. Базовая инфраструктура для любого coding-агента.",
+      "url": "https://github.com/github/github-mcp-server",
+      "secure": true,
+      "is_new": false,
+      "is_mcp": true
+    },
+    {
+      "name": "E2B MCP — Secure Code Execution Sandbox",
+      "source": "E2B / GitHub",
+      "category": "Code Execution / Security",
+      "desc": "Изолированная среда для безопасного выполнения кода агентом. Критически важный компонент после исследований ToxicSkills: вместо запуска непроверенного кода локально — песочница. Рекомендуем к установке всем, кто даёт агенту доступ к shell.",
+      "url": "https://github.com/e2b-dev/e2b-mcp",
+      "secure": true,
+      "is_new": false,
+      "is_mcp": true
+    },
+    {
+      "name": "VoltAgent awesome-agent-skills",
+      "source": "GitHub / VoltAgent",
+      "category": "Discovery / Curation",
+      "desc": "Самая большая курируемая коллекция: 1000+ агентских навыков, совместимых с Claude Code, Codex, Gemini CLI, Cursor и ещё 9 платформами. Сгруппированы по категориям. Отличная отправная точка для поиска навыков под конкретную задачу.",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "secure": true,
+      "is_new": false,
+      "is_mcp": false
+    },
+    {
+      "name": "Best-of-MCP-Servers (400 серверов, 1.1M звёзд)",
+      "source": "GitHub / tolkonepiu",
+      "category": "Discovery / Index",
+      "desc": "Ранжированный каталог 400 MCP-серверов по 34 категориям. Суммарно 1.1 млн звёзд. Использует алгоритм ранжирования по звёздам и активности. Лучший способ найти MCP-сервер под любую задачу — от баз данных до облачных API.",
+      "url": "https://github.com/tolkonepiu/best-of-mcp-servers",
+      "secure": true,
+      "is_new": false,
+      "is_mcp": true
+    }
+  ],
+  "editor_note": "Первый выпуск — фокус на фундамент: лучшие MCP-серверы (Playwright, GitHub, E2B) и стандарты безопасности (OWASP AST10). Начинаем с базы, в следующих выпусках — нишевые навыки."
+}
