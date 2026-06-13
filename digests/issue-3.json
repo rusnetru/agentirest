@@ -1,0 +1,92 @@
+{
+  "issue": 3,
+  "date": "2026-06-13",
+  "title": "Выпуск #3: Кибербезопасность, умный дом и AI-медиа — MCP выходит в реальный мир",
+  "skills": [
+    {
+      "name": "Exgram — Диаграммы из prompt'а в реальном времени",
+      "source": "GitHub / mamadoudicko",
+      "category": "Diagrams / Visualization",
+      "desc": "Agent Skill для Claude Code: превращает текстовый промпт или скриншот в живую редактируемую Excalidraw-диаграмму. Без API-ключей, без подписок — диаграмма открывается в браузере и обновляется по мере уточнений. Поддерживает ER-схемы, архитектурные планы, flow-чарты, mind-карты и многое другое.",
+      "url": "https://github.com/mamadoudicko/exgram",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "npx skills add mamadoudicko/exgram --agent claude-code",
+      "usage": "Скажи агенту: «нарисуй архитектуру микросервисов» или приложи скриншот: «преврати это в редактируемую диаграмму». Exgram откроет live-доску в браузере."
+    },
+    {
+      "name": "Malware-Sandbox MCP — Кибербезопасность для AI-агентов",
+      "source": "GitHub / mukul975",
+      "category": "Security / Threat Intelligence",
+      "desc": "MCP-сервер, объединяющий 9 backend'ов кибербезопасности через 20 инструментов с единым нормализованным форматом отчёта. Детонирует файлы/URL в Hybrid Analysis, tria.ge, ANY.RUN; обогащает IOCs через MalwareBazaar, ThreatFox, URLhaus, Feodo, VirusTotal; строит ATT&CK-матрицы. Компактный отчёт (~4K токенов) вместо сотен килобайт сырого JSON.",
+      "url": "https://github.com/mukul975/Malware-Sandbox-mcp",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": true,
+      "install": "git clone https://github.com/mukul975/Malware-Sandbox-mcp && cd Malware-Sandbox-mcp && pip install -e .",
+      "usage": "Добавь в mcp.json: python server.py. Скажи Claude: «проанализируй этот файл во всех песочницах и сравни вердикты» или «обогати этот IP через все threat intel источники»."
+    },
+    {
+      "name": "Civitai Gen Skill — AI-генерация медиа через навык",
+      "source": "GitHub / civitai",
+      "category": "Media Generation / AI Art",
+      "desc": "Agent Skill для генерации изображений, видео, аудио, TTS и музыки через Civitai Workflow API. Единый асинхронный цикл (submit → poll → download) для всех типов генерации. Формат AgentSkills, совместим с Claude Code, OpenClaw, Cursor, Codex. Требуется CIVITAI_API_KEY.",
+      "url": "https://github.com/civitai/civitai-gen-skill",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "npx skills add civitai/civitai-gen-skill",
+      "usage": "Установи CIVITAI_API_KEY в .env. Затем: «сгенерируй изображение киберпанк-города» или «создай короткое видео с дроном над горами». Агент сам подберёт модель и параметры."
+    },
+    {
+      "name": "Master Skills — 2 658 навыков в одной библиотеке",
+      "source": "GitHub / sinhoneyy",
+      "category": "Skill Library / Meta",
+      "desc": "Унифицированная библиотека из 2 658 Agent Skills в 15 доменах: безопасность, DevOps, frontend, backend, данные, AI/ML, продуктивность и другие. Единый машинно-читаемый каталог (skills_index.json), ноль зависимостей. Поддерживает Claude Code, Codex, Cursor, Antigravity, Gemini CLI, Kiro, OpenCode и другие рантаймы через один CLI.",
+      "url": "https://github.com/sinhoneyy/master-skills",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "npx skills add sinhoneyy/master-skills",
+      "usage": "Установи и используй фильтры: npx master-skills --claude --category security,backend. Затем вызывай навыки через /trigger в агенте. Просмотр каталога: npx master-skills --list."
+    },
+    {
+      "name": "SharkClean MCP — Робот-пылесос под управлением AI",
+      "source": "GitHub / a-funk",
+      "category": "IoT / Smart Home",
+      "desc": "MCP-сервер для роботов-пылесосов SharkNinja. Позволяет AI-агенту запускать уборку, выбирать комнаты, отправлять робота на базу и проверять статус — на естественном языке. Работает через актуальное облако SharkNinja (skegox), поддерживает мульти-роботные аккаунты. Неофициальный, построен на community reverse engineering.",
+      "url": "https://github.com/a-funk/sharkclean-mcp",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": true,
+      "install": "git clone https://github.com/a-funk/sharkclean-mcp && cd sharkclean-mcp && cp .env.example .env && uv run shark-mcp-auth",
+      "usage": "Одноразовый вход через браузер (shark-mcp-auth). Затем: claude mcp add sharkclean -- uv run shark-mcp. Команды: «пропылесось кухню и гостиную» или «сколько заряда у робота?»"
+    },
+    {
+      "name": "SSR Concept MCP — Маркетинговые исследования через синтетических потребителей",
+      "source": "GitHub / 0xksure",
+      "category": "Market Research / Business",
+      "desc": "MCP-сервер для тестирования продуктовых концепций на синтетических потребителях. Claude разыгрывает панель демографически обоснованных потребителей, реагирующих на ваше предложение, а Semantic Similarity Rating (Maier et al. 2025) превращает реакции в распределения purchase intent (Likert 1-5). Идеально для быстрой валидации идей без фокус-групп.",
+      "url": "https://github.com/0xksure/ssr-concept-mcp",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": true,
+      "install": "git clone https://github.com/0xksure/ssr-concept-mcp && cd ssr-concept-mcp && pip install -e .",
+      "usage": "Создай description.md с описанием продукта. Скажи Claude: «проведи SSR concept test для этого продукта». Получишь таблицу с Mean Purchase Intent и распределением."
+    },
+    {
+      "name": "VERDICT — DFIR-расследования с доказуемым вердиктом",
+      "source": "GitHub / TimothyVang",
+      "category": "Security / Forensics",
+      "desc": "DFIR-агент на базе Claude Code, создающий подписанные офлайн-верифицируемые вердикты. Представлен на SANS Find Evil! 2026. Стек: Python + Rust + Node. Собирает артефакты, анализирует таймлайн, генерирует криптографически подписанный отчёт, который можно проверить без доступа к агенту. Включает Docker-упаковку и Obsidian-интеграцию.",
+      "url": "https://github.com/TimothyVang/verdict-dfir",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": true,
+      "install": "git clone https://github.com/TimothyVang/verdict-dfir && cd verdict-dfir && pnpm install && pip install -r requirements.txt",
+      "usage": "Запусти через Docker или локально. Скажи Claude: «проведи DFIR-расследование этой системы и выдай подписанный вердикт». Результат — .sift-файл с криптографической подписью."
+    }
+  ],
+  "editor_note": "Выпуск #3 — MCP и Agent Skills выходят за пределы чистого кодинга. Кибербезопасность (Malware-Sandbox, VERDICT), умный дом (SharkClean), маркетинговые исследования (SSR Concept) и AI-медиа (Civitai Gen) — навыки становятся интерфейсом к реальному миру. Master Skills с 2 658 навыками — must-have библиотека для любого агента. Exgram — самый простой способ делать архитектурные диаграммы."
+}

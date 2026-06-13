@@ -11,7 +11,9 @@
       "url": "https://github.com/microsoft/playwright-mcp",
       "secure": true,
       "is_new": false,
-      "is_mcp": true
+      "is_mcp": true,
+      "install": "npx @anthropic/create-mcp-server playwright",
+      "usage": "Подключи в mcp.json: {\"mcpServers\":{\"playwright\":{\"command\":\"npx\",\"args\":[\"-y\",\"@anthropic/create-mcp-server\",\"playwright\"]}}}. Агент сможет открывать сайты, делать скриншоты, кликать, заполнять формы."
     },
     {
       "name": "13-Agent Security Orchestrator",
@@ -21,7 +23,9 @@
       "url": "https://www.reddit.com/r/ClaudeAI/comments/1rqnt3y/",
       "secure": true,
       "is_new": true,
-      "is_mcp": false
+      "is_mcp": false,
+      "install": "git clone <repo> && cp -r skill/ ~/.claude/skills/security-orchestrator",
+      "usage": "Скопируй папку навыка в ~/.claude/skills/. Агент автоматически подхватит SKILL.md. Вызов: «просканируй проект на уязвимости»."
     },
     {
       "name": "OWASP Agentic Skills Top 10 (AST10)",
@@ -31,7 +35,9 @@
       "url": "https://owasp.org/www-project-agentic-skills-top-10/",
       "secure": true,
       "is_new": true,
-      "is_mcp": false
+      "is_mcp": false,
+      "install": "Открой https://owasp.org/www-project-agentic-skills-top-10/",
+      "usage": "Не навык, а стандарт. Прочитай перед установкой любых сторонних SKILL.md — поймёшь главные риски безопасности."
     },
     {
       "name": "GitHub MCP Server (Official)",
@@ -41,7 +47,9 @@
       "url": "https://github.com/github/github-mcp-server",
       "secure": true,
       "is_new": false,
-      "is_mcp": true
+      "is_mcp": true,
+      "install": "npx -y @anthropic/create-mcp-server github",
+      "usage": "Подключи в mcp.json: {\"mcpServers\":{\"github\":{\"command\":\"npx\",\"args\":[\"-y\",\"@anthropic/create-mcp-server\",\"github\"]}}}. Нужен GitHub токен в переменной GITHUB_TOKEN."
     },
     {
       "name": "E2B MCP — Secure Code Execution Sandbox",
@@ -51,7 +59,9 @@
       "url": "https://github.com/e2b-dev/e2b-mcp",
       "secure": true,
       "is_new": false,
-      "is_mcp": true
+      "is_mcp": true,
+      "install": "npx -y @anthropic/create-mcp-server e2b",
+      "usage": "Нужен E2B API ключ (e2b.dev). После подключения агент выполняет код в песочнице, а не локально. Безопасно для непроверенных навыков."
     },
     {
       "name": "VoltAgent awesome-agent-skills",
@@ -61,7 +71,9 @@
       "url": "https://github.com/VoltAgent/awesome-agent-skills",
       "secure": true,
       "is_new": false,
-      "is_mcp": false
+      "is_mcp": false,
+      "install": "git clone https://github.com/VoltAgent/awesome-agent-skills",
+      "usage": "Это КАТАЛОГ, а не отдельный навык. Клонируй репозиторий и просматривай папки с SKILL.md. Скопируй понравившиеся в ~/.claude/skills/."
     },
     {
       "name": "Best-of-MCP-Servers (400 серверов, 1.1M звёзд)",
@@ -71,7 +83,9 @@
       "url": "https://github.com/tolkonepiu/best-of-mcp-servers",
       "secure": true,
       "is_new": false,
-      "is_mcp": true
+      "is_mcp": true,
+      "install": "git clone https://github.com/tolkonepiu/best-of-mcp-servers",
+      "usage": "Это ИНДЕКС 400 MCP-серверов. Открой README.md, выбери нужный сервер по категории, установи через npx или docker."
     }
   ],
   "editor_note": "Первый выпуск — фокус на фундамент: лучшие MCP-серверы (Playwright, GitHub, E2B) и стандарты безопасности (OWASP AST10). Начинаем с базы, в следующих выпусках — нишевые навыки."

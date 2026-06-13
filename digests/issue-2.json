@@ -1,0 +1,92 @@
+{
+  "issue": 2,
+  "date": "2026-06-13",
+  "title": "Выпуск #2: Agent Skills взлетают — дизайн, качество и архитектура",
+  "skills": [
+    {
+      "name": "Baoyu Design — Claude Design локально",
+      "source": "GitHub / JimLiu",
+      "category": "UI/UX Design",
+      "desc": "Запускает Claude Design локально как Agent Skill. Генерирует polished UI-мокапы, прототипы, презентации и вайрфреймы в виде автономного HTML — без подписки claude.ai/design. Совместим с Claude Code, Cursor и другими платформами. Лучше всего работает с Opus 4.8. 835+ звёзд за неделю с момента создания.",
+      "url": "https://github.com/JimLiu/baoyu-design",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/JimLiu/baoyu-design && cp -r baoyu-design/skill ~/.claude/skills/baoyu-design",
+      "usage": "Скопируй SKILL.md в ~/.claude/skills/. Вызов: «спроектируй landing page для SaaS-продукта» или «создай wireframe дашборда»."
+    },
+    {
+      "name": "Guard Skills — Quality Gates для AI-кода",
+      "source": "GitHub / amElnagdy",
+      "category": "Quality / Security",
+      "desc": "Набор навыков-стражников для coding-агентов. Quality gates, которые ловят AI-специфичные паттерны ошибок в коде, тестах и документации — именно те failure modes, которые характерны для AI-генерации. 603+ звезды. Поддерживает Claude Code, Codex, skills.sh.",
+      "url": "https://github.com/amElnagdy/guard-skills",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/amElnagdy/guard-skills && cp -r guard-skills/skills/* ~/.claude/skills/",
+      "usage": "После установки навыки автоматически активируются при code review. Скажи агенту: «проверь код с guard skills» — и он найдёт характерные AI-ошибки."
+    },
+    {
+      "name": "Effective HTML — Диаграммы и архитектурные планы",
+      "source": "GitHub / plannotator",
+      "category": "Diagrams / Planning",
+      "desc": "Agent Skill для создания элегантных HTML-диаграмм, архитектурных планов и схем. Превращает текстовые описания в чистые визуализации на чистом HTML/CSS. 533+ звезды. Идеален для архитектурных решений и технической документации.",
+      "url": "https://github.com/plannotator/effective-html",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/plannotator/effective-html && cp effective-html/skill.md ~/.claude/skills/effective-html.md",
+      "usage": "Вызов: «нарисуй архитектуру микросервисов» или «создай диаграмму pipeline CI/CD». Результат — самодостаточный HTML-файл."
+    },
+    {
+      "name": "AlignDev — Единые стандарты для всех AI-агентов",
+      "source": "GitHub / razr001",
+      "category": "DevTools / Standards",
+      "desc": "Генерирует единые стандарты кодирования и SKILL.md-файлы, чтобы Claude Code, Codex, Cursor, Copilot и другие агенты писали код в одном стиле. Решает проблему «каждый агент форматирует по-своему». 428+ звёзд.",
+      "url": "https://github.com/razr001/align-dev",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/razr001/align-dev && cd align-dev && npm install",
+      "usage": "Запусти align-dev в корне проекта; он проанализирует кодовую базу и сгенерирует SKILL.md с правилами форматирования, которые подхватят все агенты."
+    },
+    {
+      "name": "Architect Loop — Claude-архитектор + GPT-строитель",
+      "source": "GitHub / DanMcInerney",
+      "category": "Multi-Agent / Meta",
+      "desc": "Исследовательски обоснованный навык для Claude Code: Claude (Opus 4.5) выступает архитектором, GPT-5.5 Codex — строителем, а Git-репозиторий — общей памятью. Реализует кросс-вендорный agent loop с разделением ролей design/implement. 223+ звезды.",
+      "url": "https://github.com/DanMcInerney/architect-loop",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/DanMcInerney/architect-loop && cp architect-loop/skill.md ~/.claude/skills/architect-loop.md",
+      "usage": "Активируй навык в Claude Code, и он начнёт проектировать архитектуру, делегируя реализацию Codex через Git. Команда: «спроектируй систему и реализуй через architect loop»."
+    },
+    {
+      "name": "Ghidra RPC — Агентский реверс-инжиниринг",
+      "source": "GitHub / Cellebrite Labs",
+      "category": "Security / Reverse Engineering",
+      "desc": "Навык для агентского реверс-инжиниринга через Ghidra — индустриальный стандарт RE-инструментов. Позволяет AI-агенту анализировать бинарные файлы, декомпилировать и исследовать уязвимости. Создан Cellebrite Labs. 202+ звезды.",
+      "url": "https://github.com/cellebrite-labs/ghidra-rpc",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/cellebrite-labs/ghidra-rpc && cp ghidra-rpc/skill.md ~/.claude/skills/ghidra-rpc.md",
+      "usage": "Требует установленный Ghidra. После копирования навыка скажи агенту: «проанализируй этот бинарник через Ghidra RPC»."
+    },
+    {
+      "name": "BrandDocs — Документы в корпоративном стиле",
+      "source": "GitHub / ferdinandobons",
+      "category": "Documents / Branding",
+      "desc": "Набор agent skills, которые изучают существующие шаблоны Word, PowerPoint и Excel и генерируют новые документы в том же брендовом стиле. В отличие от generic AI-генераторов документов, сохраняет шрифты, цвета, логотипы и структуру компании. 159+ звёзд.",
+      "url": "https://github.com/ferdinandobons/brand-docs",
+      "secure": true,
+      "is_new": true,
+      "is_mcp": false,
+      "install": "git clone https://github.com/ferdinandobons/brand-docs && cp -r brand-docs/skills/* ~/.claude/skills/",
+      "usage": "Укажи агенту папку с шаблонами .docx/.pptx/.xlsx: «изучи шаблоны в /templates и создай презентацию по брифу». BrandDocs сохранит стиль."
+    }
+  ],
+  "editor_note": "Выпуск #2 — взрывной рост Agent Skills за неделю. Baoyu Design (835 звёзд за 6 дней!) и Guard Skills (603) задают новые стандарты: AI-дизайн и AI-безопасность становятся навыками, а не отдельными продуктами. AlignDev решает реальную проблему команд — зоопарк стилей от разных агентов."
+}

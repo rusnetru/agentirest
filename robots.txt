@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://agentirest.com/sitemap.xml
