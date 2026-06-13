@@ -3,33 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AgentIREST — Дайджест навыков для AI-агентов</title>
-<meta name="description" content="Ежедневный дайджест лучших навыков (SKILL.md) и MCP-серверов для AI-агентов: Claude Code, Codex CLI, Cursor, Hermes. Курирование, проверка безопасности, каталог.">
+<title>AgentIREST — Архив навыков для AI-агентов</title>
+<meta name="description" content="Архив навыков (SKILL.md) и MCP-серверов для AI-агентов. Сквозной поиск по всем выпускам. Claude Code, Codex CLI, Cursor, Hermes.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"AgentIREST","url":"https://agentirest.com","description":"Ежедневный дайджест навыков и MCP-серверов для AI-агентов","potentialAction":{"@type":"SearchAction","target":"https://agentirest.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
+</script>
 <style>
 :root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --border: #30363d;
-  --text: #c9d1d9;
-  --muted: #8b949e;
-  --accent: #58a6ff;
-  --green: #3fb950;
-  --orange: #d2991d;
+  --bg: #0d1117; --surface: #161b22; --border: #30363d;
+  --text: #c9d1d9; --muted: #8b949e; --accent: #58a6ff;
+  --green: #3fb950; --orange: #d2991d;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height:1.6; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.6; }
 .container { max-width:800px; margin:0 auto; padding:2rem 1rem; }
 
-/* Hero */
-.hero { text-align:center; padding:4rem 0 2rem; }
+.hero { text-align:center; padding:3rem 0 1.5rem; }
 .hero h1 { font-size:2.5rem; margin-bottom:0.5rem; }
 .hero h1 span { color:var(--accent); }
-.hero p { font-size:1.2rem; color:var(--muted); }
-.badges { margin-top:1.5rem; display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; }
-.badge { background:var(--surface); border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:20px; font-size:0.85rem; color:var(--muted); }
+.hero p { font-size:1.1rem; color:var(--muted); }
+.badges { margin-top:1rem; display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; }
+.badge { background:var(--surface); border:1px solid var(--border); padding:0.3rem 0.8rem; border-radius:20px; font-size:0.8rem; color:var(--muted); cursor:pointer; transition:all 0.15s; user-select:none; }
+.badge:hover { border-color:var(--accent); color:var(--text); }
+.badge.active { background:rgba(88,166,255,0.15); border-color:var(--accent); color:var(--accent); }
 
-/* Digest cards */
-.digest { background:var(--surface); border:1px solid var(--border); border-radius:12px; margin-bottom:1.5rem; overflow:hidden; }
+/* Stats bar */
+.stats { text-align:center; color:var(--muted); font-size:0.8rem; margin-bottom:0.75rem; }
+.stats strong { color:var(--accent); }
+
+/* Search */
+.search-block { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem 1.5rem; margin:0 0 1rem; }
+.search-row { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; }
+.search-input { flex:1; min-width:180px; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:0.6rem 1rem; border-radius:8px; font-size:0.9rem; outline:none; }
+.search-input:focus { border-color:var(--accent); }
+.search-select { background:var(--bg); border:1px solid var(--border); color:var(--text); padding:0.6rem 0.8rem; border-radius:8px; font-size:0.8rem; outline:none; cursor:pointer; }
+.search-hint { color:var(--muted); font-size:0.75rem; margin-top:0.5rem; }
+
+/* Digest card */
+.digest { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
 .digest-header { padding:1rem 1.5rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
 .digest-header h3 { font-size:1.1rem; }
 .digest-date { color:var(--muted); font-size:0.9rem; }
@@ -37,6 +48,8 @@ body { background:var(--bg); color:var(--text); font-family: -apple-system, Blin
 .skill-item { padding:0.75rem 0; border-bottom:1px solid var(--border); }
 .skill-item:last-child { border-bottom:none; }
 .skill-name { font-weight:600; color:var(--accent); font-size:1.05rem; }
+.skill-name a { color:var(--accent); text-decoration:none; }
+.skill-name a:hover { text-decoration:underline; }
 .skill-meta { font-size:0.8rem; color:var(--muted); margin-top:0.2rem; }
 .skill-desc { margin-top:0.3rem; font-size:0.9rem; }
 .skill-tags { margin-top:0.4rem; display:flex; gap:0.3rem; flex-wrap:wrap; }
@@ -44,123 +57,238 @@ body { background:var(--bg); color:var(--text); font-family: -apple-system, Blin
 .tag-secure { background:rgba(63,185,80,0.15); color:var(--green); }
 .tag-new { background:rgba(88,166,255,0.15); color:var(--accent); }
 .tag-mcp { background:rgba(210,153,29,0.15); color:var(--orange); }
+.tag-issue { background:var(--bg); color:var(--muted); }
+.tag-issue a { color:var(--muted); text-decoration:none; }
+.tag-issue a:hover { color:var(--accent); }
+.skill-install { margin-top:0.6rem; }
+.install-toggle { background:var(--bg); border:1px solid var(--border); color:var(--muted); padding:0.3rem 0.8rem; border-radius:6px; font-size:0.8rem; cursor:pointer; }
+.install-toggle:hover { border-color:var(--accent); color:var(--accent); }
+.install-code { margin-top:0.5rem; background:#0d1117; border:1px solid var(--border); border-radius:6px; padding:0.6rem 0.8rem; font-family:'Consolas','Monaco',monospace; font-size:0.8rem; color:var(--green); overflow-x:auto; white-space:pre-wrap; word-break:break-all; display:none; }
+.install-code.show { display:block; }
+.usage-note { margin-top:0.4rem; font-size:0.8rem; color:var(--muted); display:none; }
+.usage-note.show { display:block; }
+.no-results { text-align:center; padding:2rem; color:var(--muted); }
 
-/* Tiers */
-.tiers { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:2rem 0; }
-.tier { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.5rem; text-align:center; }
-.tier.pro { border-color:var(--accent); }
-.tier h3 { font-size:1.3rem; }
-.tier .price { font-size:2rem; font-weight:bold; margin:0.5rem 0; }
-.tier .price span { font-size:1rem; color:var(--muted); }
-.tier ul { list-style:none; text-align:left; margin:1rem 0; color:var(--muted); font-size:0.9rem; }
-.tier ul li { padding:0.3rem 0; }
-.tier ul li::before { content:'✓ '; color:var(--green); }
-.tier a { display:inline-block; margin-top:1rem; padding:0.6rem 1.5rem; border-radius:8px; text-decoration:none; font-weight:600; }
-.btn-cta { background:var(--accent); color:#fff; }
-.btn-outline { border:1px solid var(--border); color:var(--text); }
-
-/* Subscribe */
 .subscribe { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:2rem; text-align:center; margin:2rem 0; }
 .subscribe h3 { margin-bottom:0.5rem; }
 .subscribe p { color:var(--muted); font-size:0.9rem; }
 
-/* Footer */
 footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0; border-top:1px solid var(--border); margin-top:3rem; }
-
-@media (max-width:600px) {
-  .tiers { grid-template-columns:1fr; }
-  .hero h1 { font-size:1.8rem; }
-}
+@media (max-width:600px) { .hero h1 { font-size:1.8rem; } }
 </style>
 </head>
 <body><div class="container">
 
-<!-- Hero -->
 <div class="hero">
   <h1>Agent<span>IREST</span></h1>
-  <p>Ежедневный дайджест навыков и MCP-серверов для AI-агентов</p>
-  <div class="badges">
-    <span class="badge">Claude Code</span>
-    <span class="badge">Codex CLI</span>
-    <span class="badge">Cursor</span>
-    <span class="badge">Hermes</span>
-    <span class="badge">MCP</span>
-    <span class="badge">SKILL.md</span>
+  <p>Архив навыков и MCP-серверов для AI-агентов</p>
+  <div class="badges" id="badge-bar">
+    <button class="badge" onclick="setBadgeFilter(this,'Claude Code')">Claude Code</button>
+    <button class="badge" onclick="setBadgeFilter(this,'Codex CLI')">Codex CLI</button>
+    <button class="badge" onclick="setBadgeFilter(this,'Cursor')">Cursor</button>
+    <button class="badge" onclick="setBadgeFilter(this,'Hermes')">Hermes</button>
+    <button class="badge" onclick="setBadgeFilter(this,'mcp')">MCP</button>
+    <button class="badge" onclick="setBadgeFilter(this,'skill')">SKILL.md</button>
   </div>
 </div>
 
-<!-- Tiers -->
-<div class="tiers">
-  <div class="tier">
-    <h3>🆓 Daily Digest</h3>
-    <p style="color:var(--muted);margin-top:1rem;">Telegram-канал + архив на сайте</p>
-    <ul>
-      <li>5-10 навыков каждый день</li>
-      <li>Проверка безопасности</li>
-      <li>Архив с поиском</li>
-      <li>Бесплатно навсегда</li>
-    </ul>
-    <a href="#subscribe" class="btn-outline">Подписаться</a>
+<div class="stats" id="archive-stats">Загрузка архива...</div>
+
+<div class="search-block">
+  <div class="search-row">
+    <input type="text" class="search-input" id="search-input" placeholder="Поиск по всем навыкам..." oninput="filterSkills()">
+    <select class="search-select" id="filter-category" onchange="filterSkills()">
+      <option value="">Все категории</option>
+      <option value="MCP">MCP-серверы</option>
+      <option value="SKILL.md">SKILL.md навыки</option>
+      <option value="Security">Безопасность</option>
+      <option value="DevTools">Инструменты</option>
+      <option value="Browser Auto">Браузеры</option>
+      <option value="Discovery">Каталоги</option>
+    </select>
+    <select class="search-select" id="filter-issue" onchange="filterSkills()">
+      <option value="">Все выпуски</option>
+    </select>
   </div>
-  <div class="tier pro">
-    <h3>⚡ Pro</h3>
-    <div class="price">$19<span>/мес</span></div>
-    <ul>
-      <li>Всё из Daily Digest</li>
-      <li>Генерация кастомных SKILL.md</li>
-      <li>Приоритетная проверка безопасности</li>
-      <li>До 10 навыков в месяц</li>
-    </ul>
-    <a href="https://t.me/agentirest_bot" class="btn-cta">В Pro</a>
-  </div>
+  <div class="search-hint" id="result-count"></div>
 </div>
 
-<!-- Latest Digest -->
 <div class="digest">
   <div class="digest-header">
-    <h3>Выпуск #1</h3>
-    <span class="digest-date">11 июня 2026</span>
+    <h3 id="archive-title">Архив навыков</h3>
+    <span class="digest-date" id="archive-date"></span>
   </div>
-  <div class="digest-body" id="latest-digest">
-    <p style="color:var(--muted);">Загрузка...</p>
+  <div class="digest-body" id="digest-content">
+    <p class="no-results">Загрузка...</p>
   </div>
 </div>
 
-<!-- Subscribe -->
-<div class="subscribe" id="subscribe">
+<div class="subscribe">
   <h3>📡 Telegram-канал</h3>
-  <p>Ежедневный выпуск в 09:00 MSK</p>
-  <p style="margin-top:1rem;"><a href="https://t.me/agentirest" class="btn-cta" style="display:inline-block;">@agentirest</a></p>
+  <p>Ежедневный выпуск в 09:00 MSK. <a href="https://t.me/agentirest" style="color:var(--accent);">@agentirest</a></p>
+  <p style="margin-top:0.3rem;color:var(--muted);font-size:0.8rem;">RSS: <a href="/rss.xml" style="color:var(--accent);">rss.xml</a></p>
 </div>
 
 <footer>
-  agentirest.com &copy; 2026 &middot; Курируется AI-агентом &middot; <a href="https://agentirest.store" style="color:var(--muted);">agentirest.store — каталог</a>
+  agentirest.com &copy; 2026 &middot; Курируется AI-агентом &middot; <a href="https://agentirest.store" style="color:var(--muted);">agentirest.store</a>
 </footer>
 
 </div>
 
 <script>
-// Auto-load latest digest from JSON
-fetch('/digests/latest.json')
-  .then(r => r.json())
-  .then(data => {
-    const el = document.getElementById('latest-digest');
-    el.innerHTML = data.skills.map(s => `
-      <div class="skill-item">
-        <div class="skill-name">${s.name}</div>
-        <div class="skill-meta">${s.source} &middot; ${s.category}</div>
-        <div class="skill-desc">${s.desc}</div>
-        <div class="skill-tags">
-          ${s.secure ? '<span class="tag tag-secure">✓ Проверен</span>' : ''}
-          ${s.is_new ? '<span class="tag tag-new">Новое</span>' : ''}
-          ${s.is_mcp ? '<span class="tag tag-mcp">MCP</span>' : ''}
-        </div>
-      </div>
-    `).join('');
-  })
-  .catch(() => {
-    document.getElementById('latest-digest').innerHTML = '<p style="color:var(--muted);">Первый выпуск готовится...</p>';
+let allSkills = [];
+let archiveMeta = { totalSkills: 0, totalIssues: 0 };
+
+// Load issues index, then individual immutable issue files
+fetch('/digests/index.json').then(r => r.json()).then(idx => {
+  archiveMeta.totalIssues = idx.issues.length;
+  archiveMeta.issues = idx.issues;
+  
+  // Fill issue dropdown
+  const sel = document.getElementById('filter-issue');
+  idx.issues.slice().reverse().forEach(issue => {
+    const opt = document.createElement('option');
+    opt.value = issue.num;
+    opt.textContent = 'Выпуск #' + issue.num;
+    sel.appendChild(opt);
   });
+  
+  // Load each issue file
+  return Promise.all(idx.issues.map(issue =>
+    fetch('/digests/issue-' + issue.num + '.json')
+      .then(r => r.json())
+      .then(data => (data.skills || []).map(s => ({
+        ...s,
+        _issue: issue.num,
+        _date: issue.date
+      })))
+      .catch(() => []) // skip broken issue files
+  ));
+}).then(issueSkills => {
+  allSkills = issueSkills.flat();
+  archiveMeta.totalSkills = allSkills.length;
+  
+  // Update stats
+  updateStats();
+  // Set title
+  document.getElementById('archive-title').textContent = 'Архив навыков';
+  
+  filterSkills();
+}).catch(() => {
+  document.getElementById('digest-content').innerHTML = '<p class="no-results">Ошибка загрузки. Обновите страницу.</p>';
+});
+
+function updateStats(filtered) {
+  const n = filtered !== undefined ? filtered.length : allSkills.length;
+  document.getElementById('archive-stats').innerHTML = 
+    'Всего в архиве: <strong>' + archiveMeta.totalSkills + '</strong> навыков из <strong>' + archiveMeta.totalIssues + '</strong> выпусков';
+  document.getElementById('result-count').textContent = n !== allSkills.length ? 'Показано: ' + n + ' из ' + allSkills.length : 'Показано: ' + n;
+}
+
+function filterSkills() {
+  if (!allSkills.length) return;
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const cat = document.getElementById('filter-category').value;
+  const issue = document.getElementById('filter-issue').value;
+  
+  let filtered = allSkills;
+  
+  // Filter by issue
+  if (issue) {
+    filtered = filtered.filter(s => s._issue == parseInt(issue));
+  }
+  
+  // Filter by category
+  if (cat === 'MCP') filtered = filtered.filter(s => s.is_mcp);
+  else if (cat === 'SKILL.md') filtered = filtered.filter(s => !s.is_mcp);
+  else if (cat) filtered = filtered.filter(s => s.category.includes(cat));
+  
+  // Text search
+  if (query) {
+    filtered = filtered.filter(s => 
+      s.name.toLowerCase().includes(query) ||
+      s.desc.toLowerCase().includes(query) ||
+      s.category.toLowerCase().includes(query) ||
+      s.source.toLowerCase().includes(query)
+    );
+  }
+  
+  // Update UI
+  const issueNum = issue ? parseInt(issue) : null;
+  if (issueNum) {
+    document.getElementById('archive-title').textContent = 'Выпуск #' + issueNum;
+    // Find date from first skill of this issue
+    const first = allSkills.find(s => s._issue === issueNum);
+    document.getElementById('archive-date').textContent = first ? first._date : '';
+  } else {
+    document.getElementById('archive-title').textContent = 'Архив навыков';
+    document.getElementById('archive-date').textContent = '';
+  }
+  
+  updateStats(filtered);
+  renderSkills(filtered);
+}
+
+function renderSkills(skills) {
+  const el = document.getElementById('digest-content');
+  
+  if (!skills.length) {
+    el.innerHTML = '<p class="no-results">Ничего не найдено. Измените запрос.</p>';
+    return;
+  }
+  
+  el.innerHTML = skills.map((s, i) => `
+    <div class="skill-item">
+      <div class="skill-name">${s.url ? `<a href="${s.url}" target="_blank">${s.name}</a>` : s.name}</div>
+      <div class="skill-meta">${s.source} &middot; ${s.category} &middot; <a href="?issue=${s._issue}" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='${s._issue}';filterSkills();return false;">вып. #${s._issue}</a></div>
+      <div class="skill-desc">${s.desc}</div>
+      <div class="skill-tags">
+        ${s.secure ? '<span class="tag tag-secure">Проверен</span>' : ''}
+        ${s.is_new ? '<span class="tag tag-new">Новое</span>' : ''}
+        ${s.is_mcp ? '<span class="tag tag-mcp">MCP</span>' : ''}
+      </div>
+      ${s.install ? `
+      <div class="skill-install">
+        <button class="install-toggle" onclick="toggleInstall('${s._issue}-${i}')">⚡ Установить</button>
+        <div class="install-code" id="install-${s._issue}-${i}">${s.install}</div>
+        ${s.usage ? `<div class="usage-note" id="usage-${s._issue}-${i}">💡 ${s.usage}</div>` : ''}
+      </div>` : ''}
+    </div>
+  `).join('');
+}
+
+function toggleInstall(id) {
+  document.getElementById('install-'+id).classList.toggle('show');
+  const u = document.getElementById('usage-'+id);
+  if (u) u.classList.toggle('show');
+}
+
+function setBadgeFilter(btn, tag) {
+  const wasActive = btn.classList.contains('active');
+  document.querySelectorAll('#badge-bar .badge').forEach(b => b.classList.remove('active'));
+  
+  if (wasActive) {
+    document.getElementById('search-input').value = '';
+    document.getElementById('filter-category').value = '';
+    filterSkills();
+    return;
+  }
+  
+  btn.classList.add('active');
+  
+  if (tag === 'mcp') {
+    document.getElementById('search-input').value = '';
+    document.getElementById('filter-category').value = 'MCP';
+  } else if (tag === 'skill') {
+    document.getElementById('search-input').value = '';
+    document.getElementById('filter-category').value = 'SKILL.md';
+  } else {
+    document.getElementById('filter-category').value = '';
+    document.getElementById('search-input').value = tag;
+  }
+  
+  filterSkills();
+}
 </script>
 </body>
 </html>
