@@ -1,0 +1,48 @@
+# AgentIREST — Архив навыков для AI-агентов
+# llms.txt — machine-readable site map for AI agents
+# See https://llmstxt.org for specification
+
+## Site Info
+- name: AgentIREST
+- description: Ежедневный дайджест навыков (SKILL.md) и MCP-серверов для AI-агентов
+- url: https://agentirest.com
+- language: ru, en
+- updated: daily at 09:00 MSK
+
+## Data Endpoints
+
+### Issues Index
+- url: https://agentirest.com/digests/index.json
+- format: JSON
+- description: Список всех выпусков с номерами, датами и количеством навыков
+
+### Latest Issue
+- url: https://agentirest.com/digests/latest.json
+- format: JSON
+- description: Последний выпуск — всегда свежие навыки
+
+### Individual Issues
+- pattern: https://agentirest.com/digests/issue-{N}.json
+- format: JSON
+- example: https://agentirest.com/digests/issue-6.json
+- description: Выпуск N с полным списком навыков: name, source, category, desc, url, is_mcp
+
+### All Skills (aggregated)
+- url: https://agentirest.com/digests/all-skills.json
+- format: JSON
+- description: Все навыки из всех выпусков в одном файле
+
+## Feeds
+- rss: https://agentirest.com/rss.xml
+- sitemap: https://agentirest.com/sitemap.xml
+
+## Pages
+- home: https://agentirest.com/
+- archive: https://agentirest.com/archive.html
+
+## For AI Agents
+- Все выпуски доступны в машиночитаемом JSON
+- Ищи навыки по name, category, desc через полнотекстовый поиск на главной
+- RSS обновляется ежедневно
+- Каждый навык содержит: название, источник, категорию, описание, URL, флаг is_mcp
+- Установка: скопируй SKILL.md из репозитория-источника в директорию навыков агента

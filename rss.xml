@@ -3,11 +3,46 @@
 <channel>
   <title>AgentIREST Daily</title>
   <link>https://agentirest.com</link>
-  <description>Ежедневный дайджест навыков и MCP-серверов для AI-агентов</description>
+  <description>Ежедневный дайджест навыков (SKILL.md) и MCP-серверов для AI-агентов. Claude Code, Codex CLI, Cursor, Hermes.</description>
   <language>ru</language>
-  <lastBuildDate>Wed, 11 Jun 2026 09:00:00 +0300</lastBuildDate>
+  <lastBuildDate>Sat, 14 Jun 2026 09:00:00 +0300</lastBuildDate>
   <item>
-    <title>Выпуск #1: Топ-7 навыков и MCP-серверов недели</title>
+    <title>Выпуск #6: 101 проверенный навык из 8 маркетплейсов</title>
+    <link>https://agentirest.com/#issue-6</link>
+    <guid>https://agentirest.com/digests/issue-6.json</guid>
+    <pubDate>Sat, 14 Jun 2026 09:00:00 +0300</pubDate>
+    <description>Documents, Browser, Search, Code/Git, Deploy, Data, Security, SEO/Marketing, Automation, Media, Design/Productivity — 11 категорий, 101 навык</description>
+  </item>
+  <item>
+    <title>Выпуск #5: 100 навыков — Anthropic, OpenAI, Google, Microsoft, MCP-серверы</title>
+    <link>https://agentirest.com/#issue-5</link>
+    <guid>https://agentirest.com/digests/issue-5.json</guid>
+    <pubDate>Fri, 13 Jun 2026 21:00:00 +0300</pubDate>
+    <description>Anthropic (16), OpenAI (10), Google/Gemini (14), MCP-серверы (20), Vercel, Cloudflare, Hugging Face, Trail of Bits и другие</description>
+  </item>
+  <item>
+    <title>Выпуск #4: Big Tech вступает в игру — Google, MATLAB, Chrome DevTools</title>
+    <link>https://agentirest.com/#issue-4</link>
+    <guid>https://agentirest.com/digests/issue-4.json</guid>
+    <pubDate>Fri, 13 Jun 2026 14:00:00 +0300</pubDate>
+    <description>Google Official Agent Skills, Chrome DevTools MCP, Ghidra MCP, Claude Code Subagents Playbook, Alteryx Agent Studio, MATLAB MCP</description>
+  </item>
+  <item>
+    <title>Выпуск #3: E2B Sandbox, GitHub MCP, Firecrawl, Tavily</title>
+    <link>https://agentirest.com/#issue-3</link>
+    <guid>https://agentirest.com/digests/issue-3.json</guid>
+    <pubDate>Fri, 13 Jun 2026 09:00:00 +0300</pubDate>
+    <description>E2B Sandbox MCP, GitHub MCP Server, Firecrawl MCP, Tavily Search MCP, Qdrant Vector Search</description>
+  </item>
+  <item>
+    <title>Выпуск #2: Browserbase, Exa Search, Context7, Supabase MCP</title>
+    <link>https://agentirest.com/#issue-2</link>
+    <guid>https://agentirest.com/digests/issue-2.json</guid>
+    <pubDate>Fri, 13 Jun 2026 08:00:00 +0300</pubDate>
+    <description>Browserbase MCP, Exa Search MCP, Context7 MCP, Supabase MCP, DuckDB CLI, PostgreSQL Safe Query</description>
+  </item>
+  <item>
+    <title>Выпуск #1: Playwright MCP, 13-Agent Security Orchestrator, OWASP AST10</title>
     <link>https://agentirest.com/#issue-1</link>
     <guid>https://agentirest.com/digests/issue-1.json</guid>
     <pubDate>Wed, 11 Jun 2026 09:00:00 +0300</pubDate>
