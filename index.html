@@ -15,6 +15,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AgentIREST — Архив навыков для AI-агентов">
 <meta name="twitter:description" content="Ежедневный дайджест навыков и MCP-серверов для AI-агентов">
+<link rel="stylesheet" href="redesign.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"AgentIREST","url":"https://agentirest.com","description":"Ежедневный дайджест навыков и MCP-серверов для AI-агентов","potentialAction":{"@type":"SearchAction","target":"https://agentirest.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
@@ -114,6 +115,20 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
 </div>
 
 <div class="stats" id="archive-stats">Загрузка архива...</div>
+
+<div class="category-tabs">
+  <button class="cat-tab" onclick="setCategoryTab(this,'MCP')">MCP</button>
+  <button class="cat-tab" onclick="setCategoryTab(this,'SKILL.md')">SKILL.md</button>
+  <button class="cat-tab" onclick="setCategoryTab(this,'Security')">Безопасность</button>
+  <button class="cat-tab" onclick="setCategoryTab(this,'DevTools')">Инструменты</button>
+  <button class="cat-tab" onclick="setCategoryTab(this,'Browser Auto')">Браузеры</button>
+  <button class="cat-tab" onclick="setCategoryTab(this,'Discovery')">Каталоги</button>
+</div>
+
+<div class="trending-section" id="trending-section">
+  <div class="trending-title">🔥 Новое за неделю</div>
+  <div class="skills-grid" id="trending-grid"></div>
+</div>
 
 <div class="search-block">
   <div class="search-row">
@@ -373,6 +388,7 @@ fetch('/digests/index.json').then(r => r.json()).then(idx => {
   archiveMeta.totalSkills = allSkills.length;
 
   updateStats();
+  renderTrending();
   document.getElementById('archive-title').textContent = 'Архив навыков';
 
   appendRemainingSkills(allSkills.slice(PRERENDER_COUNT), PRERENDER_COUNT);
@@ -496,5 +512,6 @@ function setBadgeFilter(btn, tag) {
   filterSkills();
 }
 </script>
+<script src="redesign.js"></script>
 </body>
 </html>
