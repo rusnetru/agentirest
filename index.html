@@ -15,7 +15,6 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AgentIREST — Архив навыков для AI-агентов">
 <meta name="twitter:description" content="Ежедневный дайджест навыков и MCP-серверов для AI-агентов">
-<link rel="stylesheet" href="redesign.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"AgentIREST","url":"https://agentirest.com","description":"Ежедневный дайджест навыков и MCP-серверов для AI-агентов","potentialAction":{"@type":"SearchAction","target":"https://agentirest.com/?q={search_term_string}","query-input":"required name=search_term_string"}}
 </script>
@@ -24,6 +23,7 @@
   --bg: #0d1117; --surface: #161b22; --border: #30363d;
   --text: #c9d1d9; --muted: #8b949e; --accent: #58a6ff;
   --green: #3fb950; --orange: #d2991d;
+  --skeleton-highlight: #1a1a2e;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.6; }
@@ -55,7 +55,8 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkM
 .digest-header { padding:1rem 1.5rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
 .digest-header h3 { font-size:1.1rem; }
 .digest-date { color:var(--muted); font-size:0.9rem; }
-.digest-body { padding:1.5rem; }
+.digest-body { padding:1.5rem; transition:opacity 0.25s ease; }
+.digest-body.hydrating { opacity:0; }
 .skill-item { padding:0.75rem 0; border-bottom:1px solid var(--border); }
 .skill-item:last-child { border-bottom:none; }
 .skill-name { font-weight:600; color:var(--accent); font-size:1.05rem; }
@@ -80,23 +81,30 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkM
 .usage-note.show { display:block; }
 .no-results { text-align:center; padding:2rem; color:var(--muted); }
 
+/* Skeleton loaders (placeholders for cards still loading via JS) */
+.skill-item.skeleton { cursor:default; }
+.skeleton-line {
+  height:0.9rem; border-radius:4px;
+  background:linear-gradient(90deg, var(--surface) 25%, var(--skeleton-highlight) 37%, var(--surface) 63%);
+  background-size:400% 100%;
+  animation:skeleton-pulse 1.6s ease-in-out infinite;
+}
+@keyframes skeleton-pulse {
+  0% { background-position:100% 50%; }
+  100% { background-position:0 50%; }
+}
+.skill-item.skeleton .skel-title { width:55%; height:1.05rem; margin-bottom:0.6rem; }
+.skill-item.skeleton .skel-meta { width:35%; margin-bottom:0.8rem; }
+.skill-item.skeleton .skel-desc { width:100%; margin-bottom:0.4rem; }
+.skill-item.skeleton .skel-desc-short { width:70%; margin-bottom:0.8rem; }
+.skill-item.skeleton .skel-tags { width:25%; height:1.2rem; }
+
 .subscribe { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:2rem; text-align:center; margin:2rem 0; }
 .subscribe h3 { margin-bottom:0.5rem; }
 .subscribe p { color:var(--muted); font-size:0.9rem; }
 
 footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0; border-top:1px solid var(--border); margin-top:3rem; }
 @media (max-width:600px) { .hero h1 { font-size:1.8rem; } }
-
-/* Skeleton loaders */
-.skeleton-wrap { display:flex; flex-direction:column; gap:1rem; }
-.skeleton-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1rem; }
-.skeleton-line { height:14px; border-radius:6px; background:linear-gradient(90deg, var(--surface) 25%, #21262d 50%, var(--surface) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; margin-bottom:10px; }
-.skeleton-line.title { width:60%; height:18px; }
-.skeleton-line.meta { width:35%; }
-.skeleton-line.desc { width:90%; }
-.skeleton-line.desc.short { width:70%; }
-.skeleton-line.tags { width:25%; height:12px; }
-@keyframes shimmer { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
 </style>
 </head>
 <body><div class="container">
@@ -114,21 +122,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
   </div>
 </div>
 
-<div class="stats" id="archive-stats">Загрузка архива...</div>
-
-<div class="category-tabs">
-  <button class="cat-tab" onclick="setCategoryTab(this,'MCP')">MCP</button>
-  <button class="cat-tab" onclick="setCategoryTab(this,'SKILL.md')">SKILL.md</button>
-  <button class="cat-tab" onclick="setCategoryTab(this,'Security')">Безопасность</button>
-  <button class="cat-tab" onclick="setCategoryTab(this,'DevTools')">Инструменты</button>
-  <button class="cat-tab" onclick="setCategoryTab(this,'Browser Auto')">Браузеры</button>
-  <button class="cat-tab" onclick="setCategoryTab(this,'Discovery')">Каталоги</button>
-</div>
-
-<div class="trending-section" id="trending-section">
-  <div class="trending-title">🔥 Новое за неделю</div>
-  <div class="skills-grid" id="trending-grid"></div>
-</div>
+<div class="stats" id="archive-stats"><!--BUILD:STATS-->Всего в архиве: <strong>236</strong> навыков из <strong>7</strong> выпусков<!--/BUILD:STATS--></div>
 
 <div class="search-block">
   <div class="search-row">
@@ -154,16 +148,13 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
     <h3 id="archive-title">Архив навыков</h3>
     <span class="digest-date" id="archive-date"></span>
   </div>
-  <div class="digest-body" id="digest-content">
-    <!-- SSG:CARDS:START -->
+  <div class="digest-body" id="digest-content"><!--BUILD:CARDS-->
     <div class="skill-item">
       <div class="skill-name"><a href="https://github.com/microsoft/playwright-mcp" target="_blank">Playwright MCP Server</a></div>
       <div class="skill-meta">Microsoft / GitHub &middot; Browser Automation &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Самый популярный MCP-сервер 2026 года. 30 000+ звёзд на GitHub. Позволяет агенту управлять браузером: скриншоты, клики, заполнение форм, E2E-тесты. Эталонный MCP-сервер — с него стоит начинать знакомство с протоколом.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        
-        <span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-0')">⚡ Установить</button>
@@ -176,9 +167,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">Reddit r/ClaudeAI / GitHub &middot; Security &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Только что вышедший навык для Claude Code: оркестратор 12 специализированных AI-агентов безопасности. Пентест, SAST, DAST, анализ зависимостей — в одном SKILL.md. Идеальный пример того, как навыки эволюционируют от одиночных скриптов к multi-agent системам.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-1')">⚡ Установить</button>
@@ -191,9 +180,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">OWASP Foundation &middot; Security / Standards &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Первый в индустрии стандарт безопасности для AI-агентских навыков. 10 критических рисков: от prompt injection до утечки данных. Документ, который должен прочитать каждый, кто публикует или устанавливает SKILL.md-навыки.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-2')">⚡ Установить</button>
@@ -206,9 +193,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / Anthropic &middot; DevTools &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Официальный MCP-сервер GitHub: issues, PR, code search, управление репозиториями прямо из агента. Стабильный, хорошо документированный, с активным сообществом. Базовая инфраструктура для любого coding-агента.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        
-        <span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-3')">⚡ Установить</button>
@@ -221,9 +206,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">E2B / GitHub &middot; Code Execution / Security &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Изолированная среда для безопасного выполнения кода агентом. Критически важный компонент после исследований ToxicSkills: вместо запуска непроверенного кода локально — песочница. Рекомендуем к установке всем, кто даёт агенту доступ к shell.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        
-        <span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-4')">⚡ Установить</button>
@@ -237,8 +220,6 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-desc">Самая большая курируемая коллекция: 1000+ агентских навыков, совместимых с Claude Code, Codex, Gemini CLI, Cursor и ещё 9 платформами. Сгруппированы по категориям. Отличная отправная точка для поиска навыков под конкретную задачу.</div>
       <div class="skill-tags">
         <span class="tag tag-secure">Проверен</span>
-        
-        
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-5')">⚡ Установить</button>
@@ -251,9 +232,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / tolkonepiu &middot; Discovery / Index &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Ранжированный каталог 400 MCP-серверов по 34 категориям. Суммарно 1.1 млн звёзд. Использует алгоритм ранжирования по звёздам и активности. Лучший способ найти MCP-сервер под любую задачу — от баз данных до облачных API.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        
-        <span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-6')">⚡ Установить</button>
@@ -266,9 +245,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / JimLiu &middot; UI/UX Design &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Запускает Claude Design локально как Agent Skill. Генерирует polished UI-мокапы, прототипы, презентации и вайрфреймы в виде автономного HTML — без подписки claude.ai/design. Совместим с Claude Code, Cursor и другими платформами. Лучше всего работает с Opus 4.8. 835+ звёзд за неделю с момента создания.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-7')">⚡ Установить</button>
@@ -281,9 +258,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / amElnagdy &middot; Quality / Security &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Набор навыков-стражников для coding-агентов. Quality gates, которые ловят AI-специфичные паттерны ошибок в коде, тестах и документации — именно те failure modes, которые характерны для AI-генерации. 603+ звезды. Поддерживает Claude Code, Codex, skills.sh.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-8')">⚡ Установить</button>
@@ -296,9 +271,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / plannotator &middot; Diagrams / Planning &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Agent Skill для создания элегантных HTML-диаграмм, архитектурных планов и схем. Превращает текстовые описания в чистые визуализации на чистом HTML/CSS. 533+ звезды. Идеален для архитектурных решений и технической документации.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-9')">⚡ Установить</button>
@@ -311,9 +284,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / razr001 &middot; DevTools / Standards &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Генерирует единые стандарты кодирования и SKILL.md-файлы, чтобы Claude Code, Codex, Cursor, Copilot и другие агенты писали код в одном стиле. Решает проблему «каждый агент форматирует по-своему». 428+ звёзд.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-10')">⚡ Установить</button>
@@ -326,9 +297,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / DanMcInerney &middot; Multi-Agent / Meta &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Исследовательски обоснованный навык для Claude Code: Claude (Opus 4.5) выступает архитектором, GPT-5.5 Codex — строителем, а Git-репозиторий — общей памятью. Реализует кросс-вендорный agent loop с разделением ролей design/implement. 223+ звезды.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span>
-        <span class="tag tag-new">Новое</span>
-        
+        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-11')">⚡ Установить</button>
@@ -336,13 +305,28 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
         <div class="usage-note" id="usage-2-11">💡 Активируй навык в Claude Code, и он начнёт проектировать архитектуру, делегируя реализацию Codex через Git. Команда: «спроектируй систему и реализуй через architect loop».</div>
       </div>
     </div>
-  <!-- SSG:CARDS:END -->
-    <div id="skeleton-loader" class="skeleton-wrap">
-      <div class="skeleton-card"><div class="skeleton-line title"></div><div class="skeleton-line meta"></div><div class="skeleton-line desc"></div><div class="skeleton-line desc short"></div><div class="skeleton-line tags"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line title"></div><div class="skeleton-line meta"></div><div class="skeleton-line desc"></div><div class="skeleton-line desc short"></div><div class="skeleton-line tags"></div></div>
-      <div class="skeleton-card"><div class="skeleton-line title"></div><div class="skeleton-line meta"></div><div class="skeleton-line desc"></div><div class="skeleton-line desc short"></div><div class="skeleton-line tags"></div></div>
+    <div class="skill-item skeleton" aria-hidden="true">
+      <div class="skeleton-line skel-title"></div>
+      <div class="skeleton-line skel-meta"></div>
+      <div class="skeleton-line skel-desc"></div>
+      <div class="skeleton-line skel-desc skel-desc-short"></div>
+      <div class="skeleton-line skel-tags"></div>
     </div>
-  </div>
+    <div class="skill-item skeleton" aria-hidden="true">
+      <div class="skeleton-line skel-title"></div>
+      <div class="skeleton-line skel-meta"></div>
+      <div class="skeleton-line skel-desc"></div>
+      <div class="skeleton-line skel-desc skel-desc-short"></div>
+      <div class="skeleton-line skel-tags"></div>
+    </div>
+    <div class="skill-item skeleton" aria-hidden="true">
+      <div class="skeleton-line skel-title"></div>
+      <div class="skeleton-line skel-meta"></div>
+      <div class="skeleton-line skel-desc"></div>
+      <div class="skeleton-line skel-desc skel-desc-short"></div>
+      <div class="skeleton-line skel-tags"></div>
+    </div>
+  <!--/BUILD:CARDS--></div>
 </div>
 
 <div class="subscribe">
@@ -356,7 +340,6 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
 </div>
 
 <script>
-const PRERENDER_COUNT = 12;
 let allSkills = [];
 let archiveMeta = { totalSkills: 0, totalIssues: 0 };
 
@@ -365,6 +348,7 @@ fetch('/digests/index.json').then(r => r.json()).then(idx => {
   archiveMeta.totalIssues = idx.issues.length;
   archiveMeta.issues = idx.issues;
 
+  // Fill issue dropdown
   const sel = document.getElementById('filter-issue');
   idx.issues.slice().reverse().forEach(issue => {
     const opt = document.createElement('option');
@@ -373,6 +357,7 @@ fetch('/digests/index.json').then(r => r.json()).then(idx => {
     sel.appendChild(opt);
   });
 
+  // Load each issue file
   return Promise.all(idx.issues.map(issue =>
     fetch('/digests/issue-' + issue.num + '.json')
       .then(r => r.json())
@@ -381,28 +366,31 @@ fetch('/digests/index.json').then(r => r.json()).then(idx => {
         _issue: issue.num,
         _date: issue.date
       })))
-      .catch(() => [])
+      .catch(() => []) // skip broken issue files
   ));
 }).then(issueSkills => {
   allSkills = issueSkills.flat();
   archiveMeta.totalSkills = allSkills.length;
 
+  // Update stats
   updateStats();
-  renderTrending();
+  // Set title
   document.getElementById('archive-title').textContent = 'Архив навыков';
 
-  appendRemainingSkills(allSkills.slice(PRERENDER_COUNT), PRERENDER_COUNT);
+  // Fade out the pre-rendered/skeleton cards, swap in the full list, fade back in
+  const content = document.getElementById('digest-content');
+  content.classList.add('hydrating');
+  requestAnimationFrame(() => {
+    filterSkills();
+    requestAnimationFrame(() => content.classList.remove('hydrating'));
+  });
 }).catch(() => {
-  const skeleton = document.getElementById('skeleton-loader');
-  if (skeleton) skeleton.remove();
-  if (!allSkills.length) {
-    document.getElementById('digest-content').innerHTML = '<p class="no-results">Ошибка загрузки. Обновите страницу.</p>';
-  }
+  document.getElementById('digest-content').innerHTML = '<p class="no-results">Ошибка загрузки. Обновите страницу.</p>';
 });
 
 function updateStats(filtered) {
   const n = filtered !== undefined ? filtered.length : allSkills.length;
-  document.getElementById('archive-stats').innerHTML = 
+  document.getElementById('archive-stats').innerHTML =
     'Всего в архиве: <strong>' + archiveMeta.totalSkills + '</strong> навыков из <strong>' + archiveMeta.totalIssues + '</strong> выпусков';
   document.getElementById('result-count').textContent = n !== allSkills.length ? 'Показано: ' + n + ' из ' + allSkills.length : 'Показано: ' + n;
 }
@@ -412,29 +400,29 @@ function filterSkills() {
   const query = document.getElementById('search-input').value.toLowerCase();
   const cat = document.getElementById('filter-category').value;
   const issue = document.getElementById('filter-issue').value;
-  
+
   let filtered = allSkills;
-  
+
   // Filter by issue
   if (issue) {
     filtered = filtered.filter(s => s._issue == parseInt(issue));
   }
-  
+
   // Filter by category
   if (cat === 'MCP') filtered = filtered.filter(s => s.is_mcp);
   else if (cat === 'SKILL.md') filtered = filtered.filter(s => !s.is_mcp);
   else if (cat) filtered = filtered.filter(s => s.category.includes(cat));
-  
+
   // Text search
   if (query) {
-    filtered = filtered.filter(s => 
+    filtered = filtered.filter(s =>
       s.name.toLowerCase().includes(query) ||
       s.desc.toLowerCase().includes(query) ||
       s.category.toLowerCase().includes(query) ||
       s.source.toLowerCase().includes(query)
     );
   }
-  
+
   // Update UI
   const issueNum = issue ? parseInt(issue) : null;
   if (issueNum) {
@@ -446,19 +434,19 @@ function filterSkills() {
     document.getElementById('archive-title').textContent = 'Архив навыков';
     document.getElementById('archive-date').textContent = '';
   }
-  
+
   updateStats(filtered);
   renderSkills(filtered);
 }
 
 function renderSkills(skills) {
   const el = document.getElementById('digest-content');
-  
+
   if (!skills.length) {
     el.innerHTML = '<p class="no-results">Ничего не найдено. Измените запрос.</p>';
     return;
   }
-  
+
   el.innerHTML = skills.map((s, i) => `
     <div class="skill-item">
       <div class="skill-name">${s.url ? `<a href="${s.url}" target="_blank">${s.name}</a>` : s.name}</div>
@@ -485,21 +473,19 @@ function toggleInstall(id) {
   if (u) u.classList.toggle('show');
 }
 
-function setCategoryTab(btn,cat){var w=btn.classList.contains("active");document.querySelectorAll(".cat-tab").forEach(function(b){b.classList.remove("active")});if(w){document.getElementById("filter-category").value=""}else{btn.classList.add("active");document.getElementById("filter-category").value=cat}filterSkills()}
-
 function setBadgeFilter(btn, tag) {
   const wasActive = btn.classList.contains('active');
   document.querySelectorAll('#badge-bar .badge').forEach(b => b.classList.remove('active'));
-  
+
   if (wasActive) {
     document.getElementById('search-input').value = '';
     document.getElementById('filter-category').value = '';
     filterSkills();
     return;
   }
-  
+
   btn.classList.add('active');
-  
+
   if (tag === 'mcp') {
     document.getElementById('search-input').value = '';
     document.getElementById('filter-category').value = 'MCP';
@@ -510,7 +496,7 @@ function setBadgeFilter(btn, tag) {
     document.getElementById('filter-category').value = '';
     document.getElementById('search-input').value = tag;
   }
-  
+
   filterSkills();
 }
 </script>
