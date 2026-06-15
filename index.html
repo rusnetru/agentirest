@@ -105,6 +105,35 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkM
 
 footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0; border-top:1px solid var(--border); margin-top:3rem; }
 @media (max-width:600px) { .hero h1 { font-size:1.8rem; } }
+
+/* Two-column layout */
+.layout { display:flex; gap:1.5rem; align-items:flex-start; }
+.news-sidebar { width:30%; min-width:220px; flex-shrink:0; }
+.main-content { flex:1; min-width:0; }
+.news-block { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
+.news-block h4 { padding:0.75rem 1rem; border-bottom:1px solid var(--border); font-size:0.95rem; color:var(--accent); }
+.news-list { max-height:70vh; overflow-y:auto; padding:0.5rem 0; }
+.news-item { padding:0.65rem 1rem; border-bottom:1px solid var(--border); transition:background 0.15s; }
+.news-item:last-child { border-bottom:none; }
+.news-item:hover { background:rgba(88,166,255,0.04); }
+.news-date { font-size:0.7rem; color:var(--muted); margin-bottom:0.15rem; }
+.news-title { font-size:0.85rem; font-weight:600; line-height:1.35; }
+.news-title a { color:var(--text); text-decoration:none; }
+.news-title a:hover { color:var(--accent); }
+.news-summary { font-size:0.78rem; color:var(--muted); margin-top:0.25rem; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.news-badge { display:inline-block; font-size:0.65rem; padding:0.1rem 0.4rem; border-radius:8px; margin-top:0.3rem; }
+.news-badge.digest { background:rgba(88,166,255,0.12); color:var(--accent); }
+.news-badge.special { background:rgba(210,153,29,0.12); color:var(--orange); }
+.news-badge.launch { background:rgba(63,185,80,0.12); color:var(--green); }
+.news-badge.announcement { background:rgba(188,140,255,0.12); color:#bc8cff; }
+.news-loading { padding:1rem; text-align:center; color:var(--muted); font-size:0.8rem; }
+.news-empty { padding:1rem; color:var(--muted); font-size:0.8rem; text-align:center; }
+
+@media (max-width:768px) {
+  .layout { flex-direction:column; }
+  .news-sidebar { width:100%; min-width:0; }
+  .news-list { max-height:40vh; }
+}
 </style>
 </head>
 <body><div class="container">
@@ -123,6 +152,17 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
 </div>
 
 <div class="stats" id="archive-stats"><!--BUILD:STATS-->Всего в архиве: <strong>236</strong> навыков из <strong>7</strong> выпусков<!--/BUILD:STATS--></div>
+
+<div class="layout">
+<div class="news-sidebar">
+  <div class="news-block">
+    <h4>Новости</h4>
+    <div class="news-list" id="news-list">
+      <div class="news-loading">Загрузка...</div>
+    </div>
+  </div>
+</div>
+<div class="main-content">
 
 <div class="search-block">
   <div class="search-row">
@@ -328,6 +368,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
     </div>
   <!--/BUILD:CARDS--></div>
 </div>
+</div><!-- /layout -->
 
 <div class="subscribe">
   <p style="color:var(--muted);font-size:0.8rem;">RSS: <a href="/rss.xml" style="color:var(--accent);">rss.xml</a> &middot; Подписаться: <a href="https://feedly.com/i/subscription/feed/https://agentirest.com/rss.xml" style="color:var(--muted);">Feedly</a> <a href="https://www.inoreader.com/?feed=https://agentirest.com/rss.xml" style="color:var(--muted);">Inoreader</a></p>
@@ -340,6 +381,29 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
 </div>
 
 <script>
+// --- News loader ---
+fetch('/news.json')
+  .then(r => r.json())
+  .then(data => {
+    const el = document.getElementById('news-list');
+    if (!data.news || !data.news.length) {
+      el.innerHTML = '<div class="news-empty">Новостей пока нет</div>';
+      return;
+    }
+    const typeLabels = {digest:'Выпуск',special:'Спецвыпуск',launch:'Запуск',announcement:'Анонс'};
+    el.innerHTML = data.news.map(n => `
+      <div class="news-item">
+        <div class="news-date">${n.date}</div>
+        <div class="news-title">${n.url ? `<a href="${n.url}" target="_blank">${n.title}</a>` : (n.issue ? `<a href="?issue=${n.issue}" onclick="document.getElementById('filter-issue').value='${n.issue}';filterSkills();return false;">${n.title}</a>` : n.title)}</div>
+        <div class="news-summary">${n.summary}</div>
+        <span class="news-badge ${n.type}">${typeLabels[n.type] || n.type}</span>
+      </div>
+    `).join('');
+  })
+  .catch(() => {
+    document.getElementById('news-list').innerHTML = '<div class="news-empty">Не удалось загрузить новости</div>';
+  });
+
 let allSkills = [];
 let archiveMeta = { totalSkills: 0, totalIssues: 0 };
 

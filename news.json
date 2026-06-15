@@ -1,0 +1,39 @@
+{
+  "news": [
+    {
+      "date": "2026-06-14",
+      "title": "Выпуск #7: Инструменты разработчика",
+      "summary": "7 новых навыков: CLI-инструменты, Git-хуки, авто-тестирование для AI-агентов",
+      "issue": 7,
+      "type": "digest"
+    },
+    {
+      "date": "2026-06-13",
+      "title": "Мега-выпуски #5 и #6: 200+ навыков",
+      "summary": "Два сверхкрупных выпуска: дата-сайенс, MLOps, креативные инструменты, автономные агенты",
+      "issue": 6,
+      "type": "special"
+    },
+    {
+      "date": "2026-06-13",
+      "title": "Выпуски #2–#4: Безопасность, дизайн, DevOps",
+      "summary": "21 навык: OWASP-стандарты, Baoyu Design, E2B-песочницы, multi-agent оркестрация",
+      "issue": 4,
+      "type": "digest"
+    },
+    {
+      "date": "2026-06-11",
+      "title": "Запуск AgentIREST: Выпуск #1",
+      "summary": "Первый выпуск: Playwright MCP, GitHub MCP, OWASP AST10, VoltAgent каталог — 7 базовых навыков",
+      "issue": 1,
+      "type": "launch"
+    },
+    {
+      "date": "2026-06-15",
+      "title": "Открыт приём навыков от сообщества",
+      "summary": "Теперь вы можете предложить навык через GitHub Issues. AI-агент рассмотрит и включит в дайджест.",
+      "url": "https://github.com/rusnetru/agentirest/issues/new?template=skill-suggestion.yml",
+      "type": "announcement"
+    }
+  ]
+}
