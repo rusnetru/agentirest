@@ -109,7 +109,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
 /* Two-column layout */
 .layout { display:flex; gap:1.5rem; align-items:flex-start; }
 .news-sidebar { width:30%; min-width:220px; flex-shrink:0; }
-.main-content { flex:1; min-width:0; }
+.main-content { width:65%; min-width:400px; }
 .news-block { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-bottom:1.5rem; }
 .news-block h4 { padding:0.75rem 1rem; border-bottom:1px solid var(--border); font-size:0.95rem; color:var(--accent); }
 .news-list { max-height:70vh; overflow-y:auto; padding:0.5rem 0; }
@@ -151,7 +151,7 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
   </div>
 </div>
 
-<div class="stats" id="archive-stats"><!--BUILD:STATS-->Всего в архиве: <strong>236</strong> навыков из <strong>7</strong> выпусков<!--/BUILD:STATS--></div>
+<div class="stats" id="archive-stats"><!--BUILD:STATS-->Всего в архиве: <strong>255</strong> навыков из <strong>7</strong> выпусков<!--/BUILD:STATS--></div>
 
 <div class="layout">
 <div class="news-sidebar">
@@ -194,7 +194,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">Microsoft / GitHub &middot; Browser Automation &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Самый популярный MCP-сервер 2026 года. 30 000+ звёзд на GitHub. Позволяет агенту управлять браузером: скриншоты, клики, заполнение форм, E2E-тесты. Эталонный MCP-сервер — с него стоит начинать знакомство с протоколом.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-0')">⚡ Установить</button>
@@ -207,7 +208,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">Reddit r/ClaudeAI / GitHub &middot; Security &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Только что вышедший навык для Claude Code: оркестратор 12 специализированных AI-агентов безопасности. Пентест, SAST, DAST, анализ зависимостей — в одном SKILL.md. Идеальный пример того, как навыки эволюционируют от одиночных скриптов к multi-agent системам.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-1')">⚡ Установить</button>
@@ -220,7 +222,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">OWASP Foundation &middot; Security / Standards &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Первый в индустрии стандарт безопасности для AI-агентских навыков. 10 критических рисков: от prompt injection до утечки данных. Документ, который должен прочитать каждый, кто публикует или устанавливает SKILL.md-навыки.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-2')">⚡ Установить</button>
@@ -233,7 +236,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / Anthropic &middot; DevTools &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Официальный MCP-сервер GitHub: issues, PR, code search, управление репозиториями прямо из агента. Стабильный, хорошо документированный, с активным сообществом. Базовая инфраструктура для любого coding-агента.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-3')">⚡ Установить</button>
@@ -246,7 +250,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">E2B / GitHub &middot; Code Execution / Security &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Изолированная среда для безопасного выполнения кода агентом. Критически важный компонент после исследований ToxicSkills: вместо запуска непроверенного кода локально — песочница. Рекомендуем к установке всем, кто даёт агенту доступ к shell.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-4')">⚡ Установить</button>
@@ -272,7 +277,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / tolkonepiu &middot; Discovery / Index &middot; <a href="?issue=1" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='1';filterSkills();return false;">вып. #1</a></div>
       <div class="skill-desc">Ранжированный каталог 400 MCP-серверов по 34 категориям. Суммарно 1.1 млн звёзд. Использует алгоритм ранжирования по звёздам и активности. Лучший способ найти MCP-сервер под любую задачу — от баз данных до облачных API.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-mcp">MCP</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-mcp">MCP</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('1-6')">⚡ Установить</button>
@@ -285,7 +291,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / JimLiu &middot; UI/UX Design &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Запускает Claude Design локально как Agent Skill. Генерирует polished UI-мокапы, прототипы, презентации и вайрфреймы в виде автономного HTML — без подписки claude.ai/design. Совместим с Claude Code, Cursor и другими платформами. Лучше всего работает с Opus 4.8. 835+ звёзд за неделю с момента создания.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-7')">⚡ Установить</button>
@@ -298,7 +305,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / amElnagdy &middot; Quality / Security &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Набор навыков-стражников для coding-агентов. Quality gates, которые ловят AI-специфичные паттерны ошибок в коде, тестах и документации — именно те failure modes, которые характерны для AI-генерации. 603+ звезды. Поддерживает Claude Code, Codex, skills.sh.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-8')">⚡ Установить</button>
@@ -311,7 +319,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / plannotator &middot; Diagrams / Planning &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Agent Skill для создания элегантных HTML-диаграмм, архитектурных планов и схем. Превращает текстовые описания в чистые визуализации на чистом HTML/CSS. 533+ звезды. Идеален для архитектурных решений и технической документации.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-9')">⚡ Установить</button>
@@ -324,7 +333,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / razr001 &middot; DevTools / Standards &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Генерирует единые стандарты кодирования и SKILL.md-файлы, чтобы Claude Code, Codex, Cursor, Copilot и другие агенты писали код в одном стиле. Решает проблему «каждый агент форматирует по-своему». 428+ звёзд.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-10')">⚡ Установить</button>
@@ -337,7 +347,8 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
       <div class="skill-meta">GitHub / DanMcInerney &middot; Multi-Agent / Meta &middot; <a href="?issue=2" style="color:var(--muted);" onclick="document.getElementById('filter-issue').value='2';filterSkills();return false;">вып. #2</a></div>
       <div class="skill-desc">Исследовательски обоснованный навык для Claude Code: Claude (Opus 4.5) выступает архитектором, GPT-5.5 Codex — строителем, а Git-репозиторий — общей памятью. Реализует кросс-вендорный agent loop с разделением ролей design/implement. 223+ звезды.</div>
       <div class="skill-tags">
-        <span class="tag tag-secure">Проверен</span><span class="tag tag-new">Новое</span>
+        <span class="tag tag-secure">Проверен</span>
+        <span class="tag tag-new">Новое</span>
       </div>
       <div class="skill-install">
         <button class="install-toggle" onclick="toggleInstall('2-11')">⚡ Установить</button>
@@ -345,29 +356,9 @@ footer { text-align:center; color:var(--muted); font-size:0.8rem; padding:2rem 0
         <div class="usage-note" id="usage-2-11">💡 Активируй навык в Claude Code, и он начнёт проектировать архитектуру, делегируя реализацию Codex через Git. Команда: «спроектируй систему и реализуй через architect loop».</div>
       </div>
     </div>
-    <div class="skill-item skeleton" aria-hidden="true">
-      <div class="skeleton-line skel-title"></div>
-      <div class="skeleton-line skel-meta"></div>
-      <div class="skeleton-line skel-desc"></div>
-      <div class="skeleton-line skel-desc skel-desc-short"></div>
-      <div class="skeleton-line skel-tags"></div>
-    </div>
-    <div class="skill-item skeleton" aria-hidden="true">
-      <div class="skeleton-line skel-title"></div>
-      <div class="skeleton-line skel-meta"></div>
-      <div class="skeleton-line skel-desc"></div>
-      <div class="skeleton-line skel-desc skel-desc-short"></div>
-      <div class="skeleton-line skel-tags"></div>
-    </div>
-    <div class="skill-item skeleton" aria-hidden="true">
-      <div class="skeleton-line skel-title"></div>
-      <div class="skeleton-line skel-meta"></div>
-      <div class="skeleton-line skel-desc"></div>
-      <div class="skeleton-line skel-desc skel-desc-short"></div>
-      <div class="skeleton-line skel-tags"></div>
-    </div>
   <!--/BUILD:CARDS--></div>
 </div>
+</div><!-- /main-content -->
 </div><!-- /layout -->
 
 <div class="subscribe">
