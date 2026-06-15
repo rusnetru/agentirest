@@ -1,0 +1,90 @@
+{
+  "num": 7,
+  "date": "2026-06-14",
+  "skills": [
+    {
+      "name": "Agent Harness Generator",
+      "url": "https://github.com/ruvnet/agent-harness-generator",
+      "source": "GitHub / ruvnet",
+      "category": "DevTools / Meta",
+      "desc": "Мета-harness для AI-агентов: scaffold агента с npx CLI, MCP-сервером, памятью и веб-интерфейсом. 71+ звёзд.",
+      "is_mcp": false,
+      "is_new": true,
+      "secure": true,
+      "install": "npx agent-harness-generator init my-agent",
+      "usage": "Создай агента одной командой — CLI, MCP и веб-интерфейс из коробки."
+    },
+    {
+      "name": "Tiger — API Client с MCP",
+      "url": "https://github.com/jtaoufik/tiger",
+      "source": "GitHub / jtaoufik",
+      "category": "DevTools",
+      "desc": "Бесплатный open-source API-клиент с git и MCP-сервером. Локальный, без аккаунта, альтернатива Postman. 43+ звезды.",
+      "is_mcp": true,
+      "is_new": true,
+      "secure": true,
+      "install": "git clone https://github.com/jtaoufik/tiger",
+      "usage": "Запусти Tiger — агент тестирует API через MCP-интерфейс."
+    },
+    {
+      "name": "SkillReaper — Аудит агентского стека",
+      "url": "https://github.com/thousandflowers/skillreaper",
+      "source": "GitHub / thousandflowers",
+      "category": "DevTools / Quality",
+      "desc": "Сканирует и удаляет неиспользуемые навыки и MCP-серверы на основе транскриптов сессий. 17+ звёзд.",
+      "is_mcp": false,
+      "is_new": true,
+      "secure": true,
+      "install": "git clone https://github.com/thousandflowers/skillreaper",
+      "usage": "skillreaper scan — узнай какие навыки реально используются."
+    },
+    {
+      "name": "MCP Quickstart — Forge за 30с",
+      "url": "https://github.com/G12789/mcp-quickstart",
+      "source": "GitHub / G12789",
+      "category": "DevTools",
+      "desc": "Создай MCP-сервер за 30 секунд. TypeScript или Python, с тестами и инспектором. 16+ звёзд.",
+      "is_mcp": true,
+      "is_new": true,
+      "secure": true,
+      "install": "git clone https://github.com/G12789/mcp-quickstart",
+      "usage": "Выбери шаблон — получишь готовый скелет MCP-сервера."
+    },
+    {
+      "name": "Scrinium — Wiki-память для агентов",
+      "url": "https://github.com/ozgurcd/scrinium",
+      "source": "GitHub / ozgurcd",
+      "category": "Memory / Knowledge",
+      "desc": "Go MCP-сервер: llm-wiki как слой долговременной памяти с контролем доступа. Агент помнит контекст между сессиями. 6+ звёзд.",
+      "is_mcp": true,
+      "is_new": true,
+      "secure": true,
+      "install": "git clone https://github.com/ozgurcd/scrinium && go build",
+      "usage": "Подключи к llm-wiki — агент получит структурированную память."
+    },
+    {
+      "name": "BaZi ZiWei — AI-астрология",
+      "url": "https://github.com/dzcmemory-web/bazi-ziwei-skill",
+      "source": "GitHub / dzcmemory-web",
+      "category": "Fun / Culture",
+      "desc": "SKILL.md для китайской астрологии: алгоритмический расчёт Бацзы и Цзы Вэй. Три режима анализа +水墨-постеры. 23+ звезды.",
+      "is_mcp": false,
+      "is_new": true,
+      "secure": true,
+      "install": "git clone https://github.com/dzcmemory-web/bazi-ziwei-skill",
+      "usage": "Дай дату рождения — получишь астрологический анализ и постер."
+    },
+    {
+      "name": "Skillet — Менеджер навыков",
+      "url": "https://github.com/Brattlof/skillet",
+      "source": "GitHub / Brattlof",
+      "category": "DevTools",
+      "desc": "Пакетный менеджер для SKILL.md, MCP-серверов, Claude Code команд и хуков. Централизованная установка и обновление.",
+      "is_mcp": false,
+      "is_new": true,
+      "secure": false,
+      "install": "git clone https://github.com/Brattlof/skillet",
+      "usage": "skillet install <навык> — единый менеджер агентского стека."
+    }
+  ]
+}

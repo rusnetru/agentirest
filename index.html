@@ -485,6 +485,8 @@ function toggleInstall(id) {
   if (u) u.classList.toggle('show');
 }
 
+function setCategoryTab(btn,cat){var w=btn.classList.contains("active");document.querySelectorAll(".cat-tab").forEach(function(b){b.classList.remove("active")});if(w){document.getElementById("filter-category").value=""}else{btn.classList.add("active");document.getElementById("filter-category").value=cat}filterSkills()}
+
 function setBadgeFilter(btn, tag) {
   const wasActive = btn.classList.contains('active');
   document.querySelectorAll('#badge-bar .badge').forEach(b => b.classList.remove('active'));
@@ -512,6 +514,5 @@ function setBadgeFilter(btn, tag) {
   filterSkills();
 }
 </script>
-<script src="redesign.js"></script>
 </body>
 </html>
