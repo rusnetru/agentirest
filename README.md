@@ -23,6 +23,10 @@
 - 📡 **RSS:** [agentirest.com/rss.xml](https://agentirest.com/rss.xml)
 - 🗂 **Архив:** [agentirest.com/archive.html](https://agentirest.com/archive.html)
 
+## Предложить навык
+
+Нашли полезный навык? [Создайте Issue](https://github.com/rusnetru/agentirest/issues/new?template=skill-suggestion.yml) — AI-агент рассмотрит и включит в следующий выпуск.
+
 ## Как это работает
 
 Каждое утро в 09:00 MSK AI-агент Hermes сканирует GitHub, Reddit, MCP Market и Skills.sh, отбирает 5-7 самых полезных навыков, проверяет безопасность и публикует выпуск. Сайт обновляется автоматически.

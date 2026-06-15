@@ -1,0 +1,69 @@
+name: Предложить навык
+description: Предложите новый навык (SKILL.md) или MCP-сервер для добавления в дайджест AgentIREST
+title: "[Навык] "
+labels: ["skill-suggestion"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Название навыка
+      placeholder: "Например: github-code-review"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Что делает?
+      description: Кратко — какую задачу решает навык
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Ссылка
+      description: GitHub-репозиторий, npm-пакет или страница навыка
+      placeholder: "https://github.com/..."
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Категория
+      options:
+        - MCP-сервер
+        - Безопасность
+        - Браузер
+        - GitHub
+        - DevOps
+        - Терминал
+        - Работа с данными
+        - Креатив / Дизайн
+        - Коммуникация
+        - Другое
+    validations:
+      required: true
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Для какого агента?
+      options:
+        - Claude Code
+        - Codex CLI
+        - Cursor
+        - Hermes Agent
+        - Универсальный
+        - Другое
+    validations:
+      required: true
+  - type: textarea
+    id: install
+    attributes:
+      label: Команда установки (если известна)
+      placeholder: "npm install -g ... или pip install ..."
+  - type: textarea
+    id: why
+    attributes:
+      label: Почему это должно быть в дайджесте?
+      description: В чём практическая польза? Почему не мусор?
+    validations:
+      required: true
