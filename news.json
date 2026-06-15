@@ -1,39 +1,60 @@
 {
   "news": [
     {
+      "date": "2026-06-15",
+      "title": "Открыт приём навыков от сообщества",
+      "summary": "Предложите навык через GitHub Issues — AI-агент рассмотрит и включит в дайджест.",
+      "url": "https://github.com/rusnetru/agentirest/issues/new?template=skill-suggestion.yml",
+      "type": "announcement"
+    },
+    {
       "date": "2026-06-14",
-      "title": "Выпуск #7: Инструменты разработчика",
-      "summary": "7 новых навыков: CLI-инструменты, Git-хуки, авто-тестирование для AI-агентов",
+      "title": "Выпуск #7: DevTools / Meta, DevTools, DevTools / Quality",
+      "summary": "7 навыков: Agent Harness Generator, Tiger — API Client с MCP, SkillReaper — Аудит агентского стека",
       "issue": 7,
       "type": "digest"
     },
     {
       "date": "2026-06-13",
-      "title": "Мега-выпуски #5 и #6: 200+ навыков",
-      "summary": "Два сверхкрупных выпуска: дата-сайенс, MLOps, креативные инструменты, автономные агенты",
+      "title": "Выпуск #6: Documents, Browser, Search",
+      "summary": "115 навыков: Anthropic PDF Skill, Anthropic DOCX Skill, Anthropic XLSX Skill",
       "issue": 6,
-      "type": "special"
+      "type": "digest"
     },
     {
       "date": "2026-06-13",
-      "title": "Выпуски #2–#4: Безопасность, дизайн, DevOps",
-      "summary": "21 навык: OWASP-стандарты, Baoyu Design, E2B-песочницы, multi-agent оркестрация",
+      "title": "Выпуск #5: Productivity / Documents, Design / Frontend, Development / MCP",
+      "summary": "105 навыков: Anthropic Docx Skill, Anthropic PDF Skill, Anthropic PPTX Skill",
+      "issue": 5,
+      "type": "digest"
+    },
+    {
+      "date": "2026-06-13",
+      "title": "Выпуск #4: Discovery / Standards, Browser Automation / DevTools, Security / Reverse Engineering",
+      "summary": "7 навыков: Google Official Agent Skills Repository, Chrome DevTools MCP Server (Official), Ghidra MCP Server — AI-Powered Reverse Engineering",
       "issue": 4,
       "type": "digest"
     },
     {
-      "date": "2026-06-11",
-      "title": "Запуск AgentIREST: Выпуск #1",
-      "summary": "Первый выпуск: Playwright MCP, GitHub MCP, OWASP AST10, VoltAgent каталог — 7 базовых навыков",
-      "issue": 1,
-      "type": "launch"
+      "date": "2026-06-13",
+      "title": "Выпуск #3: Diagrams / Visualization, Security / Threat Intelligence, Media Generation / AI Art",
+      "summary": "7 навыков: Exgram — Диаграммы из prompt'а в реальном времени, Malware-Sandbox MCP — Кибербезопасность для AI-агентов, Civitai Gen Skill — AI-генерация медиа через навык",
+      "issue": 3,
+      "type": "digest"
     },
     {
-      "date": "2026-06-15",
-      "title": "Открыт приём навыков от сообщества",
-      "summary": "Теперь вы можете предложить навык через GitHub Issues. AI-агент рассмотрит и включит в дайджест.",
-      "url": "https://github.com/rusnetru/agentirest/issues/new?template=skill-suggestion.yml",
-      "type": "announcement"
+      "date": "2026-06-13",
+      "title": "Выпуск #2: UI/UX Design, Quality / Security, Diagrams / Planning",
+      "summary": "7 навыков: Baoyu Design — Claude Design локально, Guard Skills — Quality Gates для AI-кода, Effective HTML — Диаграммы и архитектурные планы",
+      "issue": 2,
+      "type": "digest"
+    },
+    {
+      "date": "2026-06-11",
+      "title": "Выпуск #1: Browser Automation, Security, Security / Standards",
+      "summary": "7 навыков: Playwright MCP Server, 13-Agent Security Orchestrator, OWASP Agentic Skills Top 10 (AST10)",
+      "issue": 1,
+      "type": "digest"
     }
   ]
 }
